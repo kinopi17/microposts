@@ -1,0 +1,17 @@
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1><%= @user.name %></h1>
+      <span><%= link_to "view my profile", @user %></span>
+    </section>
+  </aside>
+</div>  
+<div class="span8">
+    <h3><%= @title %></h3>
+    <% if @users.any? %>
+    <%@users.each do |follow| %>
+    <%#=follow.name%>
+    <span><%=link_to follow.name ,follow%></span>
+    <% end %>
+    <% end %>
+</div>

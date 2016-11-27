@@ -31,7 +31,6 @@ class UsersController < ApplicationController
     if @user!=current_user
       redirect_to root_url
     end
-  
    respond_to do |format|
      if @user.update(user_params)
        format.html { redirect_to @user,notice:'profile was successfully updated.'}
@@ -40,24 +39,22 @@ class UsersController < ApplicationController
        format.html{render action:'edit'}   
        format.json{render json: @user.errors,status: :unprocessable_entity}
      end
-     
-  def following
+   end
+  end  
+  def followings
     @title = "Following"
     @user  = User.find(params[:id])
-    @users = @user.following.paginate(page: params[:page])
+    @users = @user.following_users
     render 'show_follow'
   end
 
   def followers
     @title = "Followers"
     @user  = User.find(params[:id])
-    @users = @user.followers.paginate(page: params[:page])
+    @users = @user.follower_users
     render 'show_follow'
   end
 
-   end
-  end     
-  
   private
   
   def user_params
@@ -65,4 +62,3 @@ class UsersController < ApplicationController
                                  :password_confirmation)
   end
 end
-
